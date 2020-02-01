@@ -1,0 +1,30 @@
+<div align="center">Toolbox</div>
+<!-- <table>
+    <tbody *ngFor="let tool of tools; let i = index">
+        <tr *ngIf="i % 2 == 0">
+            <td><img src="{{ tool.imgPath }}" alt=""></td>
+            <td><img src="{{ i < tools.length - 1 ? tools[i + 1].imgPath : ''}}" alt=""></td>
+        </tr>
+    </tbody>
+</table> -->
+
+<div>
+    <table>
+        <tbody *ngFor="let tool of tools; let i = index">
+            <tr *ngIf="i % 2 == 0">
+                <!-- <td>{{tool.name}}</td> -->
+                <td>
+                    <a [routerLink]="" (click)="!!clickTool(tool.name)" (dblclick)="dblClickTool(tool.name)">
+                        <img src="{{ tool.imgPath }}" alt="">
+                    </a>
+                </td>
+                <!-- <td>{{i < tools.length - 1 ? tools[i + 1].name : ""}}</td> -->
+                <td>
+                    <a [routerLink]="" (click)="clickTool(tools[i + 1].name)" (dblclick)="dblClickTool(tools[i + 1].name)">
+                        <img src="{{ i < tools.length - 1 ? tools[i + 1].imgPath : ''}}" alt="">
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
