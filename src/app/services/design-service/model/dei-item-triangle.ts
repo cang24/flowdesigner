@@ -1,12 +1,11 @@
 import { DEIItem } from './dei-item';
+import { Tool } from 'src/app/toolbox/tool.model';
 
 export class DEIItemTriangle extends DEIItem{
-    public type: string;
-    public x: number;
-    public y: number;
+    public type: Tool;
 
-    constructor(x: number, y:number){
-        super("Triangle", x, y);
+    constructor(designElement: Tool, x: number, y:number){
+        super(designElement, x, y, 64, 64);
     }
 
     protected getImg(): CanvasImageSource{

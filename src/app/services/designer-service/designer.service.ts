@@ -2,6 +2,7 @@ import { Injectable, ElementRef } from '@angular/core';
 import { DesignService } from '../design-service/design-service';
 import { KeyMgrService } from '../key-mgr-service/key-mgr-service';
 import { CanvasMgrService } from '../canvas-mgr-service/canvas-mgr-service';
+import { Tool } from 'src/app/toolbox/tool.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,9 @@ export class DesignerService {
   //   this.canvasMgrService = canvasMgrService;
   // }
 
-  public selectElementToInsert(elementName: string){
-    console.log("Selected tool is: [" + elementName + "]");
-    this.canvasMgrService.selectElementToInsert(elementName);
+  public selectElementToInsert(element: Tool){
+    console.log("Selected tool is: [" + element.getName() + "]");
+    this.canvasMgrService.selectElementToInsert(element);
   }
 
   setCanvas(canvas: ElementRef<HTMLCanvasElement>) {
@@ -46,7 +47,13 @@ export class DesignerService {
     this.canvasMgrService.mouseClick(e.clientX, e.clientY);
   }
 
-  insertDEI(typeToInsertDEI: string, x: number, y: number) {
+  insertDEI(typeToInsertDEI: Tool, x: number, y: number) {
     this.designService.insertDEI(typeToInsertDEI, x, y);
+  }
+
+  tryToSelectExistingDEI(canMouseX: number, canMouseY: number) {
+    this.designService.tryToSelectExistingDEI(canMouseX, canMouseY);
+
+    this.designService.drawDesign(this.canvasMgrService.getCanvas());
   }
 }

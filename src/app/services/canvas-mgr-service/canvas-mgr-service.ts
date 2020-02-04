@@ -1,6 +1,7 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { DesignerService } from '../designer-service/designer.service';
 import { BaseService } from '../base-service/base-service';
+import { Tool } from 'src/app/toolbox/tool.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CanvasMgrService extends BaseService {
   private offsetX: number;
   private offsetY: number;
   private isInsertingDEI: boolean;
-  private typeToInsertDEI: string;
+  private typeToInsertDEI: Tool;
   
   constructor() { 
     super();
@@ -22,11 +23,11 @@ export class CanvasMgrService extends BaseService {
     this.isInsertingDEI = false;
   }
   
-  selectElementToInsert(elementName: string) {
-    console.log("[CanvasMgrService] selected element to insert: [" + elementName + "]");
+  selectElementToInsert(element: Tool) {
+    console.log("[CanvasMgrService] selected element to insert: [" + element.getName() + "]");
 
     this.isInsertingDEI = true;
-    this.typeToInsertDEI = elementName;
+    this.typeToInsertDEI = element;
   }
 
   mouseMoveInsertDEI(mouseX: number, mouseY: number){
@@ -50,6 +51,9 @@ export class CanvasMgrService extends BaseService {
       this.facadeService.insertDEI(this.typeToInsertDEI, canMouseX, canMouseY);
 
       this.isInsertingDEI = false;
+    }else{
+      //Maybe it is trying to select an existing DEI
+      this.facadeService.tryToSelectExistingDEI(canMouseX, canMouseY);
     }
   }
 

@@ -29,7 +29,7 @@ export class ToolboxComponent {
     setTimeout(()=>{
         if(this.toggleClick){
           console.log("Click on " + i);
-          this.designerService.selectElementToInsert(this.tools[i].name);
+          this.designerService.selectElementToInsert(this.tools[i]);
         }
     },250);
   }
