@@ -48,6 +48,8 @@ export class CanvasMgrService extends BaseService {
 
     if (this.isInsertingDEI){
       this.facadeService.insertDEI(this.typeToInsertDEI, canMouseX, canMouseY);
+
+      this.isInsertingDEI = false;
     }
   }
 
