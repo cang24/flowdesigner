@@ -8,7 +8,7 @@ import { DesignerService } from '../services/designer-service/designer.service';
   styleUrls: ['./toolbox.component.css']
 })
 export class ToolboxComponent {
-  private toggle: Boolean = true;
+  private toggleClick: Boolean = true;
 
   tools: Tool[] = [
     new Tool("triangle", "assets/img/triangle_64.png"),
@@ -25,17 +25,17 @@ export class ToolboxComponent {
   }
 
   clickTool(i: number){
-    this.toggle = true;
+    this.toggleClick = true;
     setTimeout(()=>{
-        if(this.toggle){
+        if(this.toggleClick){
           console.log("Click on " + i);
           this.designerService.selectElementToInsert(this.tools[i].name);
         }
-    },250)
+    },250);
   }
 
   dblClickTool(i: number){
-    this.toggle = false;
+    this.toggleClick = false;
     console.log("Double Click on " + i);
   }
 
