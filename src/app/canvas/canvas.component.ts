@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { DesignerService } from '../services/designer-service/designer.service';
 
 @Component({
   selector: 'app-canvas',
@@ -10,12 +11,20 @@ export class CanvasComponent implements OnInit {
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
 
-  private ctx: CanvasRenderingContext2D;
+  private designerService: DesignerService;
   
-  constructor() { }
+  constructor(designerService: DesignerService) { 
+    this.designerService = designerService;
+  }
 
   ngOnInit(): void {
-    this.ctx = this.canvas.nativeElement.getContext('2d');
+    this.designerService.setCanvas(this.canvas);
+  }
+
+  @HostListener('document:mousemove', ['$event']) 
+  mouseMoveHandler(e){
+    console.log("Mouse move detected");
+    this.designerService.mouseMove(e);
   }
 
 }

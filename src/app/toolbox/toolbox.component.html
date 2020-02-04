@@ -14,13 +14,13 @@
             <tr *ngIf="i % 2 == 0">
                 <!-- <td>{{tool.name}}</td> -->
                 <td>
-                    <a [routerLink]="" (click)="!!clickTool(tool.name)" (dblclick)="dblClickTool(tool.name)">
+                    <a [routerLink]="" (click)="!!clickTool(i)" (dblclick)="dblClickTool(i)">
                         <img src="{{ tool.imgPath }}" alt="">
                     </a>
                 </td>
                 <!-- <td>{{i < tools.length - 1 ? tools[i + 1].name : ""}}</td> -->
                 <td>
-                    <a [routerLink]="" (click)="clickTool(tools[i + 1].name)" (dblclick)="dblClickTool(tools[i + 1].name)">
+                    <a [routerLink]="" (click)="clickTool(i + 1)" (dblclick)="dblClickTool(i + 1)">
                         <img src="{{ i < tools.length - 1 ? tools[i + 1].imgPath : ''}}" alt="">
                     </a>
                 </td>
