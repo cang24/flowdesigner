@@ -67,6 +67,10 @@ export class DesignService extends BaseService{
     }
   }
 
+  getSelectedDEI(): DEIItem{
+    return this.deis[this.idxSelectedDEI];
+  }
+
   tryToDragExistingDEI(canMouseX: number, canMouseY: number) {
     var idxSelectedDEI = this.getClickedDEI(canMouseX, canMouseY);
 

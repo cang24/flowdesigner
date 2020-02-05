@@ -3,6 +3,7 @@ import { DesignService } from '../design-service/design-service';
 import { KeyMgrService } from '../key-mgr-service/key-mgr-service';
 import { CanvasMgrService } from '../canvas-mgr-service/canvas-mgr-service';
 import { Tool } from 'src/app/toolbox/tool.model';
+import { DEIItem } from '../design-service/model/dei-item';
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +91,9 @@ export class DesignerService {
     this.keyMgrService.keyPress(e);
   }
 
+  getSelectedDEI(): DEIItem{
+    return this.designService.getSelectedDEI();
+  }
 
   tryToRemoveSelectedDEI() {
     this.designService.tryToRemoveSelectedDEI();
