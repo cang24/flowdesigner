@@ -40,7 +40,8 @@ export class DesignerService {
   }
 
   mouseMove(e){
-    this.designService.drawDesign(this.canvasMgrService.getCanvas());
+    this.designService.drawDesign(this.canvasMgrService.getCanvas(),
+        e.clientX, e.clientY);
     this.canvasMgrService.mouseMove(e.clientX, e.clientY);
   }
 
@@ -67,18 +68,21 @@ export class DesignerService {
   tryToSelectExistingDEI(canMouseX: number, canMouseY: number) {
     this.designService.tryToSelectExistingDEI(canMouseX, canMouseY);
 
-    this.designService.drawDesign(this.canvasMgrService.getCanvas());
+    this.designService.drawDesign(this.canvasMgrService.getCanvas(),
+        canMouseX, canMouseY);
   }
 
   tryToDragExistingDEI(canMouseX: number, canMouseY: number) {
     this.designService.tryToDragExistingDEI(canMouseX, canMouseY);
 
-    this.designService.drawDesign(this.canvasMgrService.getCanvas());
+    this.designService.drawDesign(this.canvasMgrService.getCanvas(),
+        canMouseX, canMouseY);
   }
 
   stopDraggingExistingDEI(canMouseX: number, canMouseY: number) {
     this.designService.stopDraggingExistingDEI(canMouseX, canMouseY);
 
-    this.designService.drawDesign(this.canvasMgrService.getCanvas());
+    this.designService.drawDesign(this.canvasMgrService.getCanvas(),
+        canMouseX, canMouseY);
   }
 }

@@ -29,12 +29,33 @@ export class DEIItem {
         ctx = canvas.nativeElement.getContext('2d');
 
         //ctx.drawImage(this.getImg(), this.x, this.y);
+        ctx.drawImage(this.type.getImg(), this.x, this.y);
+        
+        // ctx.beginPath();
+        // ctx.rect(this.x, this.y, this.width, this.height);
+        // ctx.stroke();
+    }
+
+    public drawxy(canvas: ElementRef<HTMLCanvasElement>, x:number, y: number){
+        var ctx: CanvasRenderingContext2D;
+
+        ctx = canvas.nativeElement.getContext('2d');
+
+        //ctx.drawImage(this.getImg(), this.x, this.y);
         ctx.beginPath();
-        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.rect(x, y, this.width, this.height);
         ctx.stroke();
     }
 
     drawSelection(canvas: ElementRef<HTMLCanvasElement>) {
+        this.drawSelectionBase(canvas, this.x, this.y);
+    }
+
+    drawSelectionxy(canvas: ElementRef<HTMLCanvasElement>, x:number, y: number) {
+        this.drawSelectionBase(canvas, x, y);
+    }
+
+    drawSelectionBase(canvas: ElementRef<HTMLCanvasElement>, x:number, y: number){
         var ctx: CanvasRenderingContext2D;
         var outset: number = 3;
         var selMarksSize: number = 5;
@@ -43,7 +64,7 @@ export class DEIItem {
 
         //ctx.drawImage(this.getImg(), this.x, this.y);
         ctx.beginPath();
-        ctx.rect(this.x - outset, this.y - outset, this.width + (2*outset), this.height + (2*outset));
+        ctx.rect(x - outset, y - outset, this.width + (2*outset), this.height + (2*outset));
         ctx.stroke();
     }
 

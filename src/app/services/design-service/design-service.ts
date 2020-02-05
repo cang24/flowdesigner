@@ -23,17 +23,22 @@ export class DesignService extends BaseService{
     }
   }
 
-  drawDesign(canvas: ElementRef<HTMLCanvasElement>){
+  drawDesign(canvas: ElementRef<HTMLCanvasElement>, x: number, y:number){
     var i: number;
     var idxSelected: number = -1;
     //console.log("Clearing the canvas");
     canvas.nativeElement.getContext('2d').clearRect(0, 0, canvas.nativeElement.width, canvas.nativeElement.height);
     //It should be drawn from the the FIRST to the LAST, to consider the layers
     for(i = 0; i < this.deis.length; i++){
-      this.deis[i].draw(canvas);
-      if (this.deis[i].isSelected){
-        idxSelected = i;
-        this.deis[idxSelected].drawSelection(canvas);
+      if (!this.deis[i].isDragging){
+        this.deis[i].draw(canvas);
+        if (this.deis[i].isSelected){
+          idxSelected = i;
+          this.deis[idxSelected].drawSelection(canvas);
+        }
+      }else{
+        this.deis[i].drawxy(canvas, x, y);
+        this.deis[i].drawSelectionxy(canvas, x, y);
       }
     }
 
