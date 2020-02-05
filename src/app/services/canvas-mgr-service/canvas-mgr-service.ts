@@ -12,6 +12,7 @@ export class CanvasMgrService extends BaseService {
   private offsetX: number;
   private offsetY: number;
   private isInsertingDEI: boolean;
+  private isDraggingDEI: boolean;
   private typeToInsertDEI: Tool;
   
   constructor() { 
@@ -21,6 +22,7 @@ export class CanvasMgrService extends BaseService {
   onNgInit(){
     console.log("[CanvasMgrService]: Running onNgInit");
     this.isInsertingDEI = false;
+    this.isDraggingDEI = false;
   }
   
   selectElementToInsert(element: Tool) {
@@ -30,7 +32,7 @@ export class CanvasMgrService extends BaseService {
     this.typeToInsertDEI = element;
   }
 
-  mouseMoveInsertDEI(mouseX: number, mouseY: number){
+  mouseMove(mouseX: number, mouseY: number){
     var canMouseX = this.getMouseX(mouseX);
     var canMouseY = this.getMouseY(mouseY);
     // console.log("Mouse position: (" + canMouseX + ", " + canMouseY + ")")
@@ -40,6 +42,8 @@ export class CanvasMgrService extends BaseService {
       this.ctx.beginPath();
       this.ctx.rect(canMouseX, canMouseY, 64, 64);
       this.ctx.stroke();
+    }else if (this.isDraggingDEI){
+
     }
   }
 
@@ -54,6 +58,27 @@ export class CanvasMgrService extends BaseService {
     }else{
       //Maybe it is trying to select an existing DEI
       this.facadeService.tryToSelectExistingDEI(canMouseX, canMouseY);
+    }
+  }
+
+
+  mouseStartDragging(mouseX: number, mouseY: number) {
+    var canMouseX = this.getMouseX(mouseX);
+    var canMouseY = this.getMouseY(mouseY);
+
+    if (!this.isInsertingDEI){
+      this.isDraggingDEI = true;
+      this.facadeService.tryToDragExistingDEI(canMouseX, canMouseY);
+    }
+  }
+
+  mouseStopDragging(mouseX: number, mouseY: number) {
+    var canMouseX = this.getMouseX(mouseX);
+    var canMouseY = this.getMouseY(mouseY);
+
+    if (this.isDraggingDEI){
+      this.isDraggingDEI = false;
+      this.facadeService.stopDraggingExistingDEI(canMouseX, canMouseY);
     }
   }
 

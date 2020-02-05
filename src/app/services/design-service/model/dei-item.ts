@@ -8,6 +8,7 @@ export class DEIItem {
     private height: number;
     private width: number;
     public isSelected: boolean;
+    public isDragging: boolean;
 
     protected constructor(type: Tool, x: number, y:number, width: number, height: number){
         this.type = type;
@@ -19,6 +20,7 @@ export class DEIItem {
         this.height = height;
 
         this.isSelected = false;
+        this.isDragging = false;
     }
 
     public draw(canvas: ElementRef<HTMLCanvasElement>){

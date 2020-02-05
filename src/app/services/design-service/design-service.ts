@@ -44,21 +44,64 @@ export class DesignService extends BaseService{
   }
 
   tryToSelectExistingDEI(canMouseX: number, canMouseY: number) {
+    var idxSelectedDEI = this.getClickedDEI(canMouseX, canMouseY);
+
+    if (idxSelectedDEI!=null){
+      //Unselect the selected DEI (if it stills exists, maybe it was deleted)
+      if (this.idxSelectedDEI >= 0 && this.idxSelectedDEI < this.deis.length){
+        this.deis[this.idxSelectedDEI].isSelected = false;
+      }
+      
+      this.idxSelectedDEI = idxSelectedDEI;
+      this.deis[this.idxSelectedDEI].isSelected = true;
+    }else{
+      if (this.idxSelectedDEI >= 0 && this.idxSelectedDEI < this.deis.length){
+        this.deis[this.idxSelectedDEI].isSelected = false;
+      }
+      this.idxSelectedDEI = -1;
+    }
+  }
+
+  tryToDragExistingDEI(canMouseX: number, canMouseY: number) {
+    var idxSelectedDEI = this.getClickedDEI(canMouseX, canMouseY);
+
+    if (idxSelectedDEI!=null){
+      if (idxSelectedDEI == this.idxSelectedDEI){
+        this.deis[idxSelectedDEI].isDragging = true;
+      }
+    }
+  }
+
+  stopDraggingExistingDEI(canMouseX: number, canMouseY: number) {
+    var idxSelectedDEI = this.getDraggedDEI();
+
+    if (idxSelectedDEI!=null){
+      this.deis[idxSelectedDEI].isDragging = false;
+      this.deis[idxSelectedDEI].x = canMouseX;
+      this.deis[idxSelectedDEI].y = canMouseY;
+    }
+  }
+
+  getDraggedDEI():number {
+    var i: number;
+
+    for(i = this.deis.length - 1; i >= 0; i--){
+      if (this.deis[i].isDragging){
+        return i;
+      }
+    }
+  }
+
+  getClickedDEI(canMouseX: number, canMouseY: number):number {
     var i: number;
     var index: number = -1;
+
     //It should be validated from the LAST to the FIRST, to consider the layers
     for(i = this.deis.length - 1; i >= 0; i--){
       if (this.deis[i].wasClicked(canMouseX, canMouseY)){
         console.log("Clicked the item: " + i);
-        if (this.idxSelectedDEI >= 0 && this.idxSelectedDEI < this.deis.length){
-          this.deis[this.idxSelectedDEI].isSelected = false;
-        }
-        this.idxSelectedDEI = i;
-        this.deis[this.idxSelectedDEI].isSelected = true;
-        break;
-        index = i;
-      }else{
-        this.deis[i].isSelected = false;
+
+        return i;
       }
     }
   }
