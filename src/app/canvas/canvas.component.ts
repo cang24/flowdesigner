@@ -72,4 +72,10 @@ export class CanvasComponent implements OnInit {
     this.mouseMgrService.setMouseClick(false);
     console.log("Double Click detected");
   }
+
+  @HostListener('document:keypress', ['$event']) 
+  keyPressHandler(e){
+    console.log("Keypress detected");
+    this.designerService.keyPress(e);
+  }
 }

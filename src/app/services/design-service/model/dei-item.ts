@@ -16,8 +16,10 @@ export class DEIItem {
         this.x = x;
         this.y = y;
 
-        this.width = width;
-        this.height = height;
+        //this.width = width;
+        //this.height = height;
+        this.width = this.type.getWidth();
+        this.height = this.type.getHeight();
 
         this.isSelected = false;
         this.isDragging = false;
@@ -57,7 +59,7 @@ export class DEIItem {
 
     drawSelectionBase(canvas: ElementRef<HTMLCanvasElement>, x:number, y: number){
         var ctx: CanvasRenderingContext2D;
-        var outset: number = 3;
+        var outset: number = 2;
         var selMarksSize: number = 5;
 
         ctx = canvas.nativeElement.getContext('2d');

@@ -85,4 +85,16 @@ export class DesignerService {
     this.designService.drawDesign(this.canvasMgrService.getCanvas(),
         canMouseX, canMouseY);
   }
+
+  keyPress(e: any) {
+    this.keyMgrService.keyPress(e);
+  }
+
+
+  tryToRemoveSelectedDEI() {
+    this.designService.tryToRemoveSelectedDEI();
+
+    this.designService.drawDesign(this.canvasMgrService.getCanvas(),
+        0, 0);
+  }
 }

@@ -110,4 +110,13 @@ export class DesignService extends BaseService{
       }
     }
   }
+
+
+  tryToRemoveSelectedDEI() {
+    if (this.idxSelectedDEI >= 0){
+      //There's something selected
+      this.deis.splice(this.idxSelectedDEI), 1;
+      this.idxSelectedDEI = -1;
+    }
+  }
 }
