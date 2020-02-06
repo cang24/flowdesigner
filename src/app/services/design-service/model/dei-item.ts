@@ -26,12 +26,13 @@ export class DEIItem {
     }
 
     public draw(canvas: ElementRef<HTMLCanvasElement>){
-        var ctx: CanvasRenderingContext2D;
+        this.drawbase(canvas, this.x, this.y);
+        // var ctx: CanvasRenderingContext2D;
 
-        ctx = canvas.nativeElement.getContext('2d');
+        // ctx = canvas.nativeElement.getContext('2d');
 
-        //ctx.drawImage(this.getImg(), this.x, this.y);
-        ctx.drawImage(this.type.getImg(), this.x, this.y);
+        // //ctx.drawImage(this.getImg(), this.x, this.y);
+        // ctx.drawImage(this.type.getImg(), this.x, this.y);
         
         // ctx.beginPath();
         // ctx.rect(this.x, this.y, this.width, this.height);
@@ -39,14 +40,26 @@ export class DEIItem {
     }
 
     public drawxy(canvas: ElementRef<HTMLCanvasElement>, x:number, y: number){
+        this.drawbase(canvas, x, y);
+        // var ctx: CanvasRenderingContext2D;
+
+        // ctx = canvas.nativeElement.getContext('2d');
+
+        // ctx.drawImage(this.type.getImg(), this.x, this.y);
+        // ctx.beginPath();
+        // ctx.rect(x, y, this.width, this.height);
+        // ctx.stroke();
+    }
+
+    public drawbase(canvas: ElementRef<HTMLCanvasElement>, x:number, y: number){
         var ctx: CanvasRenderingContext2D;
 
         ctx = canvas.nativeElement.getContext('2d');
 
-        //ctx.drawImage(this.getImg(), this.x, this.y);
-        ctx.beginPath();
-        ctx.rect(x, y, this.width, this.height);
-        ctx.stroke();
+        ctx.drawImage(this.type.getImg(), this.x, this.y);
+        // ctx.beginPath();
+        // ctx.rect(x, y, this.width, this.height);
+        // ctx.stroke();
     }
 
     drawSelection(canvas: ElementRef<HTMLCanvasElement>) {

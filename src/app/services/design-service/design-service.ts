@@ -3,6 +3,7 @@ import { BaseService } from '../base-service/base-service';
 import { DEIItem } from './model/dei-item';
 import { DEIItemTriangle } from './model/dei-item-triangle';
 import { Tool } from 'src/app/toolbox/tool.model';
+import { DEIItemSquare } from './model/dei-item-square';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,9 @@ export class DesignService extends BaseService{
     switch(typeToInsertDEI.getName()){
       case "triangle":
         this.deis.push(new DEIItemTriangle(typeToInsertDEI, x, y));
+        break;
+      case "square":
+        this.deis.push(new DEIItemSquare(typeToInsertDEI, x, y));
         break;
       default:
         console.log("Not yet defined");
@@ -37,15 +41,17 @@ export class DesignService extends BaseService{
           this.deis[idxSelected].drawSelection(canvas);
         }
       }else{
-        this.deis[i].drawxy(canvas, x, y);
-        this.deis[i].drawSelectionxy(canvas, x, y);
+        this.deis[i].drawxy(canvas, x-270, y-40);
+        this.deis[i].drawSelectionxy(canvas, x-270, y-40);
       }
     }
 
-    if (idxSelected >= 0){
-      this.deis[idxSelected].draw(canvas);
-      this.deis[idxSelected].drawSelection(canvas);
-    }
+    // if (idxSelected >= 0){
+    //   if (!this.deis[idxSelected].isDragging){
+    //     this.deis[idxSelected].draw(canvas);
+    //     this.deis[idxSelected].drawSelection(canvas);
+    //   }
+    // }
   }
 
   tryToSelectExistingDEI(canMouseX: number, canMouseY: number) {
@@ -119,7 +125,7 @@ export class DesignService extends BaseService{
   tryToRemoveSelectedDEI() {
     if (this.idxSelectedDEI >= 0){
       //There's something selected
-      this.deis.splice(this.idxSelectedDEI), 1;
+      this.deis.splice(this.idxSelectedDEI, 1);
       this.idxSelectedDEI = -1;
     }
   }

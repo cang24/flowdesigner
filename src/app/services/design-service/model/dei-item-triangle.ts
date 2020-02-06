@@ -8,10 +8,10 @@ export class DEIItemTriangle extends DEIItem{
         super(designElement, x, y, 64, 64);
     }
 
-    protected getImg(): CanvasImageSource{
-        var imageObj = new Image();
-        imageObj.src = "/home/augusto/Documents/Posgrado/Materias/IngenieriaDeSoftware/flowdesigner/src/assets/img/square_64.png";
+    // protected getImg(): CanvasImageSource{
+    //     var imageObj = new Image();
+    //     imageObj.src = "/home/augusto/Documents/Posgrado/Materias/IngenieriaDeSoftware/flowdesigner/src/assets/img/square_64.png";
 
-        return imageObj;
-    }
+    //     return imageObj;
+    // }
 }

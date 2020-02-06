@@ -18,7 +18,7 @@ export class Tool {
 
     getName(): string{ return this.name }
     getImgPath(): string{ return this.imgPath }
-    getHeight(): number{ return this.height }
-    getWidth(): number{ return this.width }
+    getHeight(): number{ return this.img.height }
+    getWidth(): number{ return this.img.width }
     getImg(): HTMLImageElement{ return this.img }
 }
