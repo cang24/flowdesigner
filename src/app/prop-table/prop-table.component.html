@@ -2,7 +2,8 @@
     <div>Properties</div>
 </div>
 <div class="row">
-    <p>{{ getMessage() }}</p>
+    <p [innerText]="typeLabel"></p>
+    <br>
     <ng-container *ngComponentOutlet="getComponent()">
 
     </ng-container>

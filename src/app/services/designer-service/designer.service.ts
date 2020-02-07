@@ -101,4 +101,18 @@ export class DesignerService {
     this.designService.drawDesign(this.canvasMgrService.getCanvas(),
         0, 0);
   }
+
+  // Observer pattern to distribute the selection event
+  private listOfObservers: any[] = [];
+  addObserver(f: any){
+    this.listOfObservers.push(f);
+  }
+  triggerSelectionEvent(selectedElement: DEIItem): void{
+    var i: number;
+
+    console.log("Multicasting event to event handlers");
+    for(i = 0; i<this.listOfObservers.length;i++){
+      this.listOfObservers[i](selectedElement);
+    }
+  }
 }

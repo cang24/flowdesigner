@@ -4,6 +4,7 @@ import { DEIItem } from './model/dei-item';
 import { DEIItemTriangle } from './model/dei-item-triangle';
 import { Tool } from 'src/app/toolbox/tool.model';
 import { DEIItemSquare } from './model/dei-item-square';
+import { MessageService } from '../message-service/message-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class DesignService extends BaseService{
   private deis: DEIItem[] = [];
   private idxSelectedDEI: number = -1;
 
-  constructor() { super(); }
+  constructor(private messageService: MessageService) { super(); }
 
   insertDEI(typeToInsertDEI: Tool, x: number, y: number) {
     switch(typeToInsertDEI.getName()){
@@ -54,6 +55,24 @@ export class DesignService extends BaseService{
     // }
   }
 
+
+
+
+
+
+
+  //constructor() { }
+
+    sendMessage(): void {
+        // send message to subscribers via observable subject
+        this.messageService.sendMessage('Message from Home Component to App Component!');
+    }
+
+    clearMessages(): void {
+        // clear messages
+        this.messageService.clearMessages();
+    }
+
   tryToSelectExistingDEI(canMouseX: number, canMouseY: number) {
     var idxSelectedDEI = this.getClickedDEI(canMouseX, canMouseY);
 
@@ -65,6 +84,10 @@ export class DesignService extends BaseService{
       
       this.idxSelectedDEI = idxSelectedDEI;
       this.deis[this.idxSelectedDEI].isSelected = true;
+
+      console.log("Invoking to trigger the selection event");
+      //this.facadeService.triggerSelectionEvent(this.deis[this.idxSelectedDEI]);
+      this.sendMessage();
     }else{
       if (this.idxSelectedDEI >= 0 && this.idxSelectedDEI < this.deis.length){
         this.deis[this.idxSelectedDEI].isSelected = false;
