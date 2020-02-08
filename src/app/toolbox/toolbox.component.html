@@ -1,25 +1,21 @@
-<div align="center">Toolbox</div>
-<!-- <table>
-    <tbody *ngFor="let tool of tools; let i = index">
-        <tr *ngIf="i % 2 == 0">
-            <td><img src="{{ tool.imgPath }}" alt=""></td>
-            <td><img src="{{ i < tools.length - 1 ? tools[i + 1].imgPath : ''}}" alt=""></td>
-        </tr>
-    </tbody>
-</table> -->
+<div align="center">
+    <div class="col-sm">
+        <h1>Toolbox</h1>
+    </div>
+</div>
 
 <div>
-    <table>
+    <table class='table table-bordered table-hover-cells'>
         <tbody *ngFor="let tool of tools; let i = index">
             <tr *ngIf="i % 2 == 0">
                 <!-- <td>{{tool.name}}</td> -->
-                <td>
+                <td align="center" class="border">
                     <a [routerLink]="" (click)="!!clickTool(i)" (dblclick)="dblClickTool(i)">
                         <img src="{{ tool.imgPath }}" alt="">
                     </a>
                 </td>
                 <!-- <td>{{i < tools.length - 1 ? tools[i + 1].name : ""}}</td> -->
-                <td>
+                <td align="center">
                     <a [routerLink]="" (click)="clickTool(i + 1)" (dblclick)="dblClickTool(i + 1)">
                         <img src="{{ i < tools.length - 1 ? tools[i + 1].imgPath : ''}}" alt="">
                     </a>

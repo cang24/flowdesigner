@@ -33,6 +33,11 @@ export class DesignService extends BaseService{
     var idxSelected: number = -1;
     //console.log("Clearing the canvas");
     canvas.nativeElement.getContext('2d').clearRect(0, 0, canvas.nativeElement.width, canvas.nativeElement.height);
+
+    canvas.nativeElement.getContext('2d').beginPath();
+    canvas.nativeElement.getContext('2d').rect(0, 0, canvas.nativeElement.width, canvas.nativeElement.height);
+    canvas.nativeElement.getContext('2d').stroke();
+
     //It should be drawn from the the FIRST to the LAST, to consider the layers
     for(i = 0; i < this.deis.length; i++){
       if (!this.deis[i].isDragging){
@@ -42,10 +47,11 @@ export class DesignService extends BaseService{
           this.deis[idxSelected].drawSelection(canvas);
         }
       }else{
-        this.deis[i].drawxy(canvas, x-270, y-40);
-        this.deis[i].drawSelectionxy(canvas, x-270, y-40);
+        this.deis[i].drawxy(canvas, x-270, y-140);
+        this.deis[i].drawSelectionxy(canvas, x-270, y-116);
       }
     }
+
 
     // if (idxSelected >= 0){
     //   if (!this.deis[idxSelected].isDragging){
@@ -63,9 +69,9 @@ export class DesignService extends BaseService{
 
   //constructor() { }
 
-    sendMessage(): void {
+    sendMessage(deiItem: DEIItem): void {
         // send message to subscribers via observable subject
-        this.messageService.sendMessage('Message from Home Component to App Component!');
+        this.messageService.sendMessage(deiItem);
     }
 
     clearMessages(): void {
@@ -87,7 +93,7 @@ export class DesignService extends BaseService{
 
       console.log("Invoking to trigger the selection event");
       //this.facadeService.triggerSelectionEvent(this.deis[this.idxSelectedDEI]);
-      this.sendMessage();
+      this.sendMessage(this.deis[this.idxSelectedDEI]);
     }else{
       if (this.idxSelectedDEI >= 0 && this.idxSelectedDEI < this.deis.length){
         this.deis[this.idxSelectedDEI].isSelected = false;
@@ -118,6 +124,8 @@ export class DesignService extends BaseService{
       this.deis[idxSelectedDEI].x = canMouseX;
       this.deis[idxSelectedDEI].y = canMouseY;
     }
+
+    this.sendMessage(this.deis[this.idxSelectedDEI]);
   }
 
   getDraggedDEI():number {

@@ -1,10 +1,16 @@
-<div class="row">
-    <div>Properties</div>
+<div align="center">
+    <div class="col-sm">
+        <h1>Propiedades</h1>
+    </div>
 </div>
+
 <div class="row">
     <p [innerText]="typeLabel"></p>
     <br>
-    <ng-container *ngComponentOutlet="getComponent()">
+</div>
+<div>
+    <!-- <ng-container *ngComponentOutlet="getComponent()"> -->
+    <ng-container *ngComponentOutlet="propDetailComponent">
 
     </ng-container>
 </div>

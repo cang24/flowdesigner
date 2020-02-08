@@ -1,12 +1,18 @@
+import { PropTriangleComponent } from '../prop-table/prop-triangle/prop-triangle/prop-triangle.component';
+
 export class Tool {
     private name: string;
     private imgPath: string;
     private height: number;
     private width: number;
     private img: HTMLImageElement;
+    private propComponent: any;
 
-    constructor(name: string, imgPath: string){
+    constructor(name: string, imgPath: string, propComponent: any){
         this.name = name;
+
+        this.propComponent = propComponent;
+
         this.imgPath = imgPath;
 
         this.img = new Image();
@@ -21,4 +27,5 @@ export class Tool {
     getHeight(): number{ return this.img.height }
     getWidth(): number{ return this.img.width }
     getImg(): HTMLImageElement{ return this.img }
+    getPropComponent(): any { this.propComponent }
 }

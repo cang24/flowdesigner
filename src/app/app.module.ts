@@ -7,6 +7,7 @@ import { ToolboxComponent } from './toolbox/toolbox.component';
 import { CanvasComponent } from './canvas/canvas.component';
 import { PropTableComponent } from './prop-table/prop-table.component';
 import { PropTriangleComponent } from './prop-table/prop-triangle/prop-triangle/prop-triangle.component';
+import { PropSquareComponent } from './prop-table/prop-square/prop-square.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { PropTriangleComponent } from './prop-table/prop-triangle/prop-triangle/
     ToolboxComponent,
     CanvasComponent,
     PropTableComponent,
-    PropTriangleComponent
+    PropTriangleComponent,
+    PropSquareComponent
   ],
   entryComponents: [PropTriangleComponent],
   imports: [

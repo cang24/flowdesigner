@@ -95,8 +95,8 @@ export class CanvasMgrService extends BaseService {
     this.canvas = canvas;
     this.ctx = this.canvas.nativeElement.getContext('2d');
 
-    this.offsetX = this.canvas.nativeElement.offsetLeft;
-    this.offsetY = this.canvas.nativeElement.offsetTop;
+    this.offsetX = this.canvas.nativeElement.offsetLeft + 4;
+    this.offsetY = this.canvas.nativeElement.offsetTop + 58;
     
   }
 

@@ -10,6 +10,8 @@ import { MouseMgrService } from '../services/mouse-mgr-service/mouse-mgr-service
 export class CanvasComponent implements OnInit {
   private toggleClick: Boolean = false;
   private toggleDown: Boolean = false;
+  mouseX: number = 0;
+  mouseY: number = 0;
 
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
@@ -31,6 +33,12 @@ export class CanvasComponent implements OnInit {
   mouseMoveHandler(e){
     // console.log("Mouse move detected");
     this.designerService.mouseMove(e);
+    if (e.clientX>276 && e.clientX < 276 + 915){
+      this.mouseX = e.clientX - 276;
+    }
+    if (e.clientY>117 && e.clientY < 117 + 360){
+      this.mouseY = e.clientY - 117;
+    }
   }
 
   @HostListener('document:mousedown', ['$event']) 

@@ -10,36 +10,28 @@ import { MessageService } from '../services/message-service/message-service';
   templateUrl: './prop-table.component.html',
   styleUrls: ['./prop-table.component.css']
 })
-export class PropTableComponent implements OnInit {
+export class PropTableComponent {
 
   // private designerService: DesignerService;
   subscription: Subscription;
+  propDetailComponent: DEIItem;
 
-  typeLabel:string = 'Original name';
-
-  // constructor(designerService: DesignerService) {
-  //   this.designerService = designerService;
-  // }
+  typeLabel:string = '/dev/null';
 
   constructor(private designerService: DesignerService, private messageService: MessageService) {
-    // subscribe to home component messages
+    // Subscribe to message service to acquire event for the update of the table
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
-        this.typeLabel = message.text;
-      // } else {
-      //   // clear messages when empty message received
-      //   this.messages = [];
+        this.typeLabel = "Nombre: " + message.type.getName() + "\n" +
+            "X: " + message.x + "\n" +
+            "Y: " + message.y;
+        this.propDetailComponent = message.type.getPropComponent();
       }
     });
-}
-
-  ngOnInit() {
-    setTimeout(()=>{this.designerService.addObserver(this.updateTable)}, 1000)
-    setTimeout(()=>{this.typeLabel = "asdf"}, 5000)
   }
 
   ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
+    // Unsubscribe
     this.subscription.unsubscribe();
   } 
 

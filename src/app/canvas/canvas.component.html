@@ -1,6 +1,11 @@
-<p><---------- Canvas---------></p>
+<div align="center">
+    <div class="col-sm">
+        <h1>Diseño</h1>
+    </div>
+</div>
+
 <canvas #canvas 
     (move)="moveFunction($event)" 
     (dblclick)="dblClickHandler($event)" 
-    width="600" height="300"></canvas>
-<p><---------- /Canvas---------></p>
+    width="915" height="360"></canvas>
+<p class="text-status-bar">x: {{ mouseX }}   y: {{ mouseY }}</p>
